@@ -1,0 +1,6 @@
+Test: invalid IPv4 destination
+Exit code: 2
+STDERR:
+Invalid IPv4 address: not-an-ip
+
+Result: PASS – invalid IPv4 input rejected before attempting transmission.
