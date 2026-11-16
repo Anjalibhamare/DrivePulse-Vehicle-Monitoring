@@ -1,0 +1,1 @@
+Add genuine screenshots from your own Ubuntu/Wireshark execution. Suggested evidence: UDP payload, TCP three-way handshake, TCP data/FIN sequence, and dashboard terminal output.
