@@ -1,21 +1,32 @@
-# DrivePulse – Design Document
+# Vehicle Monitoring System – Design Document
 
-## Objective
-Implement a Linux C socket demonstration of vehicle telemetry exchanged between a Vehicle ECU sender and a Dashboard ECU receiver using TCP and UDP.
+## 1. Overview
+Two independent C programs model a Vehicle ECU and a Dashboard ECU. The sender generates repeatable vehicle telemetry and sends it over either TCP or UDP. The receiver parses each record and displays the vehicle parameters.
 
-## Functional blocks
-- Vehicle ECU: generates repeatable simulated speed, RPM and steering-angle values, with sequence, status and timestamp fields.
-- Transport: selectable TCP stream or UDP datagrams over IPv4.
-- Dashboard ECU: binds to a configured address/port, receives payloads, parses key/value fields and displays the values.
+## 2. Architecture
+```text
+Vehicle ECU (vehicle_ecu.c)
+  speed | engine RPM | steering | sequence | status | timestamp
+                    |
+          IPv4 socket, port 5005
+              TCP or UDP
+                    |
+Dashboard ECU (dashboard_ecu.c)
+  receive -> frame (TCP) / datagram (UDP) -> parse -> display
+```
+Both applications can run on one Linux host using 127.0.0.1.
 
-## Data format
-`seq=N,speed_kmph=N,engine_rpm=N,steering_deg=N,status=TEXT,timestamp_ms=N\n`
+## 3. Modules
+- **Vehicle ECU:** generates simulated signals and transmits telemetry records.
+- **Dashboard ECU:** binds to the selected address and port, receives records, parses fields and displays them.
+- **TCP transport:** connection-oriented byte stream; application records are separated by newline delimiters.
+- **UDP transport:** connectionless datagrams; each transmitted record is one datagram.
 
-## Default configuration
-IPv4 loopback address 127.0.0.1, port 5005, one telemetry message per second.
+## 4. Data format
+`seq=1,speed_kmph=41,engine_rpm=1167,steering_deg=-43,status=NORMAL,timestamp_ms=...`
 
-## TCP and UDP
-TCP establishes a connection and provides an ordered byte stream; newline delimiters reconstruct application records. UDP is connectionless and preserves message datagrams but does not guarantee delivery or ordering.
+## 5. Build and run
+Run `make`, then start the dashboard receiver and vehicle sender in separate terminals. Refer to the root README for exact TCP and UDP commands.
 
-## Limitations
-Signals are simulated, not read from a real vehicle. This is an educational socket project, not a production automotive ECU, SOME/IP implementation, physical 100BASE-T1 link, or safety-certified system.
+## 6. Limitations
+Signals are simulated, not measured from a physical vehicle. The project demonstrates application-layer socket communication over IPv4 loopback, not physical Ethernet, 100BASE-T1, CAN, SOME/IP, AUTOSAR or a production ECU.
