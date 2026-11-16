@@ -1,0 +1,3 @@
+Test: vehicle_ecu --protocol udp --host not-an-ip --count 1
+Observed exit code: 2.
+Observed behavior: invalid IPv4 address rejected before sending.
