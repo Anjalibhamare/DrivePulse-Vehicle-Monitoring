@@ -1,0 +1,7 @@
+[VEHICLE ECU] TCP connected to 127.0.0.1:5005
+[VEHICLE ECU] tcp | seq=1,speed_kmph=41,engine_rpm=1167,steering_deg=-43,status=NORMAL,timestamp_ms=1794806019690
+[VEHICLE ECU] tcp | seq=2,speed_kmph=54,engine_rpm=1484,steering_deg=-26,status=NORMAL,timestamp_ms=1794806019715
+[VEHICLE ECU] tcp | seq=3,speed_kmph=67,engine_rpm=1801,steering_deg=-9,status=NORMAL,timestamp_ms=1794806019740
+[VEHICLE ECU] tcp | seq=4,speed_kmph=80,engine_rpm=2118,steering_deg=8,status=NORMAL,timestamp_ms=1794806019766
+[VEHICLE ECU] tcp | seq=5,speed_kmph=93,engine_rpm=2435,steering_deg=25,status=NORMAL,timestamp_ms=1794806019791
+[VEHICLE ECU] stopped after 5 message(s)
