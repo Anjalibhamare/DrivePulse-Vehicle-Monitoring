@@ -1,13 +1,19 @@
-# TCP vs UDP – DrivePulse Comparison
+# TCP and UDP Comparison
 
 | Feature | TCP | UDP |
 |---|---|---|
 | Connection | Connection-oriented | Connectionless |
-| Delivery | Reliable retransmission/acknowledgements | Best effort; no delivery guarantee |
-| Ordering | Ordered byte stream | Datagrams may arrive out of order |
-| Overhead | Connection setup and stream management | Smaller transport header and no handshake |
-| Record boundaries | Application must frame records (newline used here) | Datagram boundaries preserved |
-| DrivePulse use | Dashboard session with orderly close | Periodic telemetry datagrams |
+| Delivery | Reliable, ordered byte stream | Best-effort datagrams |
+| Message boundaries | Not preserved; application framing required | Preserved per datagram |
+| Handshake | Three-way connection handshake | No transport handshake |
+| Delivery confirmation | Acknowledgements and retransmissions | No built-in delivery acknowledgement |
+| Typical trade-off | Reliability and ordering | Lower protocol overhead and no connection setup |
+
+## In this project
+The same telemetry fields are sent using both transports. TCP records are separated using newline delimiters because TCP is a byte stream. UDP sends one record per datagram. A successful UDP `sendto()` does not prove that the receiver received the datagram.
 
 ## Wireshark observations
-For TCP, inspect SYN, SYN-ACK, ACK, data transfer and FIN packets. For UDP, inspect each datagram and its source/destination ports. Capture genuine traffic on loopback interface `lo` using display filters `tcp.port == 5005` and `udp.port == 5005`.
+For TCP, inspect SYN, SYN-ACK, ACK, data segments, acknowledgements and connection termination. For UDP, inspect individual datagrams and their source/destination ports. Use `tcp.port == 5005` and `udp.port == 5005`.
+
+## Automotive context
+The choice of transport depends on application timing, reliability and fault-handling requirements. This educational example is not a safety design or a standards-compliant automotive Ethernet implementation.
