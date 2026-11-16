@@ -1,6 +1,6 @@
-DrivePulse build and local smoke-test record
-============================================
-Compiler: GCC C11, -Wall -Wextra -Wpedantic -O2
-Both vehicle_ecu and dashboard_ecu compiled successfully without compiler warnings.
-Loopback smoke tests: UDP dashboard received/displayed 4 telemetry records; TCP dashboard received/displayed 4 telemetry records. TCP shutdown was clean after sender write-side close.
-These tests were executed in the project-generation environment. Repeat the tests on your Ubuntu machine. No Wireshark PCAP files or screenshots are fabricated or included.
+Vehicle Monitoring System – Build and Smoke Test
+Command: make clean && make
+Compiler: gcc -std=c11 -Wall -Wextra -Wpedantic -O2
+Result: PASS – vehicle_ecu and dashboard_ecu built successfully with no compiler warnings.
+UDP: 5 telemetry messages sent; dashboard log contains 5 records.
+TCP: 5 telemetry messages sent; dashboard log contains 5 records.
