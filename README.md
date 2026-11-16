@@ -108,3 +108,15 @@ The terminal-output preview in `screenshots/` is rendered from actual applicatio
 
 ## Scope and limitations
 This is an educational Linux application-layer socket demonstration over IPv4 loopback. It does not implement a physical Ethernet PHY, 100BASE-T1, SOME/IP, CAN, AUTOSAR, real sensor acquisition, vehicle hardware, or production automotive safety functions.
+
+
+## Project output preview
+
+![Vehicle Monitoring System terminal output preview](screenshots/vehicle_monitoring_terminal_preview.svg)
+
+## Technical documentation
+- [Design Document](docs/Design_Document.md)
+- [TCP vs UDP Comparison](docs/TCP_UDP_Comparison.md)
+- [Validation Report](docs/Validation_Report.md)
+- [Experiment runner instructions](scripts/README.md)
+- [Wireshark capture instructions](wireshark/README.md)
