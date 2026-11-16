@@ -1,6 +1,5 @@
-$ make clean && make
 rm -rf build
 mkdir -p build
 gcc -std=c11 -Wall -Wextra -Wpedantic -O2 src/vehicle_ecu.c -o build/vehicle_ecu
 gcc -std=c11 -Wall -Wextra -Wpedantic -O2 src/dashboard_ecu.c -o build/dashboard_ecu
-Result: successful compilation; no compiler warnings.
+Build completed successfully with no warnings.
