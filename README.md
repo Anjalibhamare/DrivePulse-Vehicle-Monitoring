@@ -1,96 +1,110 @@
-# DrivePulse – Ethernet-Based Vehicle Monitoring System
+# Vehicle Monitoring System
 
-A Linux socket-programming project implementing vehicle-to-dashboard communication in C using **TCP and UDP**. Built for the Automotive Communication Networks – Ethernet 2 assignment.
+A Linux C socket-programming project demonstrating vehicle-to-dashboard telemetry communication using **TCP and UDP**. This project is developed for the Automotive Communication Networks – Ethernet 2 practical assignment.
 
-## Objectives
-- Generate vehicle telemetry periodically in a simulated Vehicle ECU.
-- Transmit vehicle data using UDP sockets.
-- Implement reliable TCP client-server communication.
-- Receive, parse and display vehicle information in a Dashboard ECU.
-- Compare TCP and UDP behavior and inspect traffic with Wireshark.
-- Validate normal operation, receiver-unavailable behavior and invalid configuration.
+## Project objectives
+- Generate repeatable vehicle telemetry in a simulated Vehicle ECU.
+- Transmit telemetry using TCP and UDP over IPv4 sockets.
+- Receive, validate, parse and display vehicle data in a Dashboard ECU.
+- Compare connection-oriented TCP with connectionless UDP.
+- Validate normal operation and selected communication failure cases.
+- Provide experiment logs, technical reports and a Wireshark capture workflow.
 
-## Vehicle signals
+## Vehicle parameters
 - Vehicle speed (km/h)
 - Engine RPM (rpm)
 - Steering angle (degrees)
+- Sequence number, status and millisecond timestamp
 
-Each record also contains a sequence number, status and millisecond timestamp. Signals are deterministic simulated values, not live sensor measurements.
+All vehicle values are **software-generated simulation data**, not live readings from a physical vehicle or sensors.
 
 ## Repository structure
 ```text
-DrivePulse-Vehicle-Monitoring/
+Vehicle-Monitoring-System/
 ├── README.md
-├── .gitignore
 ├── Makefile
+├── .gitignore
 ├── generate_reports.py
-├── src/                 # Vehicle ECU, Dashboard ECU and Makefile
-├── docs/                # Design, validation and TCP/UDP comparison PDFs
-├── results/             # Actual executed validation outputs
-├── logs/                # Build, sender and receiver logs
-├── scripts/             # Ubuntu experiment runner
-├── screenshots/         # Genuine terminal/Wireshark screenshots
-└── wireshark/           # Genuine TCP and UDP packet captures
+├── src/
+│   ├── vehicle_ecu.c
+│   ├── dashboard_ecu.c
+│   └── Makefile
+├── docs/
+│   ├── Design_Document.pdf / .md
+│   ├── TCP_UDP_Comparison.pdf / .md
+│   └── Validation_Report.pdf / .md
+├── logs/                 # Actual build and communication output
+├── results/              # Validation scenario results
+├── scripts/
+│   └── run_experiments.sh
+├── screenshots/          # Session-output preview and evidence guide
+└── wireshark/            # Capture instructions
+```
+
+## Requirements
+- Ubuntu or another Linux distribution
+- GCC and Make
+- Optional: Wireshark and tcpdump for packet-level analysis
+
+Install build tools on Ubuntu:
+```bash
+sudo apt update
+sudo apt install -y build-essential
 ```
 
 ## Build
-On Ubuntu/Linux:
+From the repository root:
 ```bash
-sudo apt update
-sudo apt install -y build-essential wireshark tcpdump
+make clean
 make
 ```
-The root Makefile creates `build/vehicle_ecu` and `build/dashboard_ecu`. You can also build directly from `src/` using `make -C src`.
+Executables are created in `build/`.
 
-## Run using UDP
+## Run UDP experiment
 Terminal 1 – Dashboard ECU:
 ```bash
 ./build/dashboard_ecu --protocol udp --bind 127.0.0.1 --port 5005
 ```
 Terminal 2 – Vehicle ECU:
 ```bash
-./build/vehicle_ecu --protocol udp --host 127.0.0.1 --port 5005 --count 20
+./build/vehicle_ecu --protocol udp --host 127.0.0.1 --port 5005 --count 8
 ```
 
-## Run using TCP
-Stop the UDP receiver, then start the TCP receiver in Terminal 1:
+## Run TCP experiment
+Start the TCP dashboard in Terminal 1:
 ```bash
 ./build/dashboard_ecu --protocol tcp --bind 127.0.0.1 --port 5005
 ```
-Terminal 2:
+Start the TCP vehicle sender in Terminal 2:
 ```bash
-./build/vehicle_ecu --protocol tcp --host 127.0.0.1 --port 5005 --count 20
+./build/vehicle_ecu --protocol tcp --host 127.0.0.1 --port 5005 --count 8
 ```
-The sender transmits one record approximately every second. Use `--count 0` for continuous operation.
 
-Command-line options:
-- Vehicle ECU: `--protocol tcp|udp --host IPv4 [--port N] [--count N] [--interval-ms N]`
-- Dashboard ECU: `--protocol tcp|udp [--bind IPv4] [--port N]`
+Use `--count 0` for continuous transmission. The default interval is one second; override it with `--interval-ms N`.
 
-## Automated experiment and packet capture
-Run on Ubuntu with tcpdump installed and permission to capture on loopback:
+## Automated experiments
 ```bash
 chmod +x scripts/run_experiments.sh
 ./scripts/run_experiments.sh
-``
-The script builds the applications, runs TCP and UDP sessions, records terminal logs and attempts to save packet captures in `wireshark/`. Verify the resulting PCAP files in Wireshark before submission.
+```
+The runner compiles the applications, performs TCP and UDP communication tests, records logs, and attempts packet capture if tcpdump and capture permissions are available.
 
-Useful display filters:
-| Purpose | Filter |
+## Wireshark filters
+| Purpose | Display filter |
 |---|---|
-| UDP traffic | `udp.port == 5005` |
-| TCP traffic | `tcp.port == 5005` |
+| TCP port 5005 | `tcp.port == 5005` |
+| UDP port 5005 | `udp.port == 5005` |
 | TCP SYN | `tcp.flags.syn == 1` |
 | TCP SYN-ACK | `tcp.flags.syn == 1 && tcp.flags.ack == 1` |
 | TCP FIN | `tcp.flags.fin == 1` |
 
-## Validation status
-The included `results/validation_summary.txt` records executed tests: clean compilation, five UDP telemetry records received, five TCP telemetry records received, UDP behavior with no receiver, TCP connection refusal with no receiver, and invalid IPv4 input rejection.
+For this same-host demonstration, capture on the Linux loopback interface `lo`. A loopback capture shows local IP/TCP/UDP traffic; it is not a physical Ethernet-wire capture.
 
-**Packet-capture evidence status:** this project-generation runtime did not provide raw packet-capture permission and tcpdump, so genuine PCAP files and Wireshark screenshots could not be created here. They are not fabricated or represented as completed. Generate them on Ubuntu using the experiment script, then add verified files to `wireshark/` and genuine screenshots to `screenshots/`.
+## Validation summary
+The included logs and result files record successful compilation, successful local TCP and UDP telemetry exchange, expected UDP behavior when no receiver is listening, TCP connection refusal when no receiver is listening, and invalid IPv4 input rejection.
 
-## Technical scope
-This is an educational Linux application-layer socket demonstration over IPv4 loopback (`lo`). It is not a physical Ethernet-wire capture, Ethernet PHY implementation, 100BASE-T1, SOME/IP, CAN, AUTOSAR, or a production/safety-certified automotive ECU.
+## Evidence note
+The terminal-output preview in `screenshots/` is rendered from actual application logs and is explicitly labelled as a preview, not a raw desktop screenshot. Genuine PCAP files and Wireshark screenshots must be captured on a Linux host with packet-capture permission. They are not fabricated or claimed to be present in this repository. See `wireshark/README.md` and `screenshots/README.md`.
 
-## Reports
-The `docs/` directory contains the design document, validation report and TCP/UDP comparison as PDFs. The validation report distinguishes executed application tests from packet-level evidence that still requires a capture-capable Ubuntu host.
+## Scope and limitations
+This is an educational Linux application-layer socket demonstration over IPv4 loopback. It does not implement a physical Ethernet PHY, 100BASE-T1, SOME/IP, CAN, AUTOSAR, real sensor acquisition, vehicle hardware, or production automotive safety functions.
