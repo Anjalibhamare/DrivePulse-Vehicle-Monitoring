@@ -1,0 +1,15 @@
+[DASHBOARD ECU] udp receiver listening on 127.0.0.1:5005
+
++--------------------------------------------------+
+|             VEHICLE MONITORING SYSTEM            |
++--------------------------------------------------+
+| Vehicle ECU       : 127.0.0.1                    |
+| Sequence          : 1                            |
+| Vehicle speed     : 41                       km/h |
+| Engine RPM        : 1167                         |
+| Steering angle    : -43                      deg |
+| Vehicle status    : NORMAL                       |
+| ECU timestamp     : 1794806019060                |
++--------------------------------------------------+
+[... four additional telemetry records omitted from this short excerpt; see validation summary]
+[DASHBOARD ECU] stopped
