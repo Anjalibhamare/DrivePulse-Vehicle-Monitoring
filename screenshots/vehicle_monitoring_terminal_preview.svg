@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1000" viewBox="0 0 1500 1000">
+<rect width="1500" height="1000" fill="#101827"/>
+<rect x="25" y="25" width="1450" height="950" rx="22" fill="#172337" stroke="#526781" stroke-width="2"/>
+<rect x="25" y="25" width="1450" height="70" rx="22" fill="#263750"/>
+<text x="60" y="70" font-family="monospace" font-size="28" font-weight="bold" fill="#f1f5f9">VEHICLE MONITORING SYSTEM</text>
+<text x="60" y="125" font-family="monospace" font-size="15" fill="#b6c5d8">Executed TCP/UDP terminal output preview — rendered from local test logs, not a raw desktop screenshot.</text>
+<rect x="55" y="155" width="680" height="360" rx="14" fill="#080f1b" stroke="#526781" stroke-width="2"/>
+<rect x="55" y="155" width="680" height="48" rx="14" fill="#263750"/>
+<text x="78" y="188" font-family="monospace" font-size="22" font-weight="bold" fill="#6bd0ff">UDP DASHBOARD</text>
+<g font-family="monospace" font-size="16" fill="#c7dfd0">
+<text x="75" y="238">[DASHBOARD ECU] udp receiver listening on 127.0.0.1:5005</text>
+<text x="75" y="273">+--------------------------------------------------+</text>
+<text x="75" y="298">|             VEHICLE MONITORING SYSTEM            |</text>
+<text x="75" y="323">| Sequence          : 1                            |</text>
+<text x="75" y="348">| Vehicle speed     : 41 km/h                      |</text>
+<text x="75" y="373">| Engine RPM        : 1167                         |</text>
+<text x="75" y="398">| Steering angle    : -43 deg                      |</text>
+<text x="75" y="423">| Vehicle status    : NORMAL                       |</text>
+<text x="75" y="448">+--------------------------------------------------+</text>
+<text x="75" y="483">[Dashboard received 5 UDP telemetry records]</text>
+</g>
+<rect x="765" y="155" width="680" height="360" rx="14" fill="#080f1b" stroke="#526781" stroke-width="2"/>
+<rect x="765" y="155" width="680" height="48" rx="14" fill="#263750"/>
+<text x="788" y="188" font-family="monospace" font-size="22" font-weight="bold" fill="#6bd0ff">UDP VEHICLE ECU</text>
+<g font-family="monospace" font-size="15" fill="#c7dfd0">
+<text x="785" y="238">[VEHICLE ECU] UDP sending to 127.0.0.1:5005</text>
+<text x="785" y="273">seq=1 speed=41 km/h rpm=1167 steering=-43</text>
+<text x="785" y="303">seq=2 speed=54 km/h rpm=1484 steering=-26</text>
+<text x="785" y="333">seq=3 speed=67 km/h rpm=1801 steering=-9</text>
+<text x="785" y="363">seq=4 speed=80 km/h rpm=2118 steering=8</text>
+<text x="785" y="393">seq=5 speed=93 km/h rpm=2435 steering=25</text>
+<text x="785" y="443">[VEHICLE ECU] stopped after 5 messages</text>
+</g>
+<rect x="55" y="550" width="680" height="360" rx="14" fill="#080f1b" stroke="#526781" stroke-width="2"/>
+<rect x="55" y="550" width="680" height="48" rx="14" fill="#263750"/>
+<text x="78" y="583" font-family="monospace" font-size="22" font-weight="bold" fill="#6bd0ff">TCP DASHBOARD</text>
+<g font-family="monospace" font-size="16" fill="#c7dfd0">
+<text x="75" y="633">[DASHBOARD ECU] tcp receiver listening on 127.0.0.1:5005</text>
+<text x="75" y="668">[DASHBOARD ECU] accepted TCP connection</text>
+<text x="75" y="703">+--------------------------------------------------+</text>
+<text x="75" y="728">|             VEHICLE MONITORING SYSTEM            |</text>
+<text x="75" y="753">| Sequence          : 1                            |</text>
+<text x="75" y="778">| Vehicle speed     : 41 km/h                      |</text>
+<text x="75" y="803">| Engine RPM        : 1167                         |</text>
+<text x="75" y="828">| Steering angle    : -43 deg                      |</text>
+<text x="75" y="853">+--------------------------------------------------+</text>
+</g>
+<rect x="765" y="550" width="680" height="360" rx="14" fill="#080f1b" stroke="#526781" stroke-width="2"/>
+<rect x="765" y="550" width="680" height="48" rx="14" fill="#263750"/>
+<text x="788" y="583" font-family="monospace" font-size="22" font-weight="bold" fill="#6bd0ff">TCP VEHICLE ECU</text>
+<g font-family="monospace" font-size="15" fill="#c7dfd0">
+<text x="785" y="633">[VEHICLE ECU] TCP connected to 127.0.0.1:5005</text>
+<text x="785" y="668">seq=1 speed=41 km/h rpm=1167 steering=-43</text>
+<text x="785" y="698">seq=2 speed=54 km/h rpm=1484 steering=-26</text>
+<text x="785" y="728">seq=3 speed=67 km/h rpm=1801 steering=-9</text>
+<text x="785" y="758">seq=4 speed=80 km/h rpm=2118 steering=8</text>
+<text x="785" y="788">seq=5 speed=93 km/h rpm=2435 steering=25</text>
+<text x="785" y="838">[VEHICLE ECU] stopped after 5 messages</text>
+</g>
+<text x="60" y="945" font-family="monospace" font-size="15" fill="#b6c5d8">IPv4 loopback 127.0.0.1:5005 | TCP stream | UDP datagrams | simulated telemetry</text>
+</svg>
