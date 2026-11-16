@@ -1,12 +1,8 @@
-DrivePulse validation run
-=========================
-Environment: Linux 6.18.57
-Build: GCC C11 with -Wall -Wextra -Wpedantic -O2; successful
-
-UDP loopback: sender exit=0; dashboard telemetry records=5; expected=5; PASS
-TCP loopback: sender exit=0; dashboard telemetry records=5; expected=5; PASS
-UDP receiver unavailable: exit=0; sendto may succeed without delivery confirmation (expected behavior)
-TCP receiver unavailable: exit=1; connection refused observed (expected nonzero)
-Invalid IPv4 input: exit=2; PASS
-
-Packet-level Wireshark capture was not possible in the project-generation environment because raw packet-capture permissions/tools were unavailable. No PCAP or screenshot has been fabricated. Capture on Ubuntu using scripts/run_experiments.sh.
+Vehicle Monitoring System – Validation Summary
+Build: PASS (GCC C11, -Wall -Wextra -Wpedantic -O2; no warnings)
+UDP loopback: PASS (5 telemetry records sent and displayed by dashboard)
+TCP loopback: PASS (5 telemetry records sent and displayed by dashboard)
+UDP receiver unavailable: sendto succeeds without proving delivery (expected UDP behavior)
+TCP receiver unavailable: connection refused (expected)
+Invalid IPv4 input: rejected with exit code 2
+Packet capture: not available in this execution environment; no PCAP is claimed.
