@@ -1,0 +1,4 @@
+Test: TCP sender with no receiver bound to the destination port.
+Observed exit code: 1.
+Observed behavior: TCP connection attempt failed (connection refused).
+Interpretation: the TCP connection setup detects the unavailable listener.
