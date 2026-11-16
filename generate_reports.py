@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate the three DrivePulse assignment reports (requires reportlab)."""
+"""Regenerate the three Vehicle Monitoring System assignment reports (requires reportlab)."""
 from pathlib import Path
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -16,7 +16,7 @@ styles.add(ParagraphStyle(name="DriveHead",parent=styles["Heading2"],textColor=c
 styles.add(ParagraphStyle(name="DriveBody",parent=styles["BodyText"],fontSize=9,leading=13,spaceAfter=6))
 def para(text): return Paragraph(text,styles["DriveBody"])
 def build(filename,title,sections):
-    story=[Paragraph("DRIVEPULSE",styles["DriveTitle"]),Paragraph(title,styles["Heading1"]),Spacer(1,8)]
+    story=[Paragraph("VEHICLE MONITORING SYSTEM",styles["DriveTitle"]),Paragraph(title,styles["Heading1"]),Spacer(1,8)]
     for heading,body in sections:
         story.append(Paragraph(heading,styles["DriveHead"]))
         if isinstance(body,list):
