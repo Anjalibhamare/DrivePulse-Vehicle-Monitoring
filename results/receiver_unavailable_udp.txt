@@ -1,0 +1,3 @@
+Test: UDP sender with no receiver bound to the destination port.
+Observed exit code: 0.
+Interpretation: UDP sendto() can succeed even when no receiver is listening; it does not confirm delivery. This is expected UDP behavior, not proof of packet receipt.
