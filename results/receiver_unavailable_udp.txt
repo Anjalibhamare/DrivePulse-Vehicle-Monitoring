@@ -1,3 +1,10 @@
-Test: UDP sender with no receiver bound to the destination port.
-Observed exit code: 0.
-Interpretation: UDP sendto() can succeed even when no receiver is listening; it does not confirm delivery. This is expected UDP behavior, not proof of packet receipt.
+Test: UDP sender with no receiver on 127.0.0.1:59999
+Exit code: 0
+STDOUT:
+[VEHICLE ECU] UDP sending to 127.0.0.1:59999 (connectionless)
+[VEHICLE ECU] udp | seq=1,speed_kmph=41,engine_rpm=1167,steering_deg=-43,status=NORMAL,timestamp_ms=1794806020019
+[VEHICLE ECU] stopped after 1 message(s)
+
+STDERR:
+
+Expected: UDP send operation does not confirm delivery.
