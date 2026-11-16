@@ -1,0 +1,7 @@
+/build/
+/src/vehicle_ecu
+/src/dashboard_ecu
+*.o
+*.core
+*.log
+*.tmp
