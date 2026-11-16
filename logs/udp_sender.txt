@@ -1,0 +1,7 @@
+[VEHICLE ECU] UDP sending to 127.0.0.1:5005 (connectionless)
+[VEHICLE ECU] udp | seq=1,speed_kmph=41,engine_rpm=1167,steering_deg=-43,status=NORMAL,timestamp_ms=1794806019060
+[VEHICLE ECU] udp | seq=2,speed_kmph=54,engine_rpm=1484,steering_deg=-26,status=NORMAL,timestamp_ms=1794806019085
+[VEHICLE ECU] udp | seq=3,speed_kmph=67,engine_rpm=1801,steering_deg=-9,status=NORMAL,timestamp_ms=1794806019110
+[VEHICLE ECU] udp | seq=4,speed_kmph=80,engine_rpm=2118,steering_deg=8,status=NORMAL,timestamp_ms=1794806019135
+[VEHICLE ECU] udp | seq=5,speed_kmph=93,engine_rpm=2435,steering_deg=25,status=NORMAL,timestamp_ms=1794806019160
+[VEHICLE ECU] stopped after 5 message(s)
