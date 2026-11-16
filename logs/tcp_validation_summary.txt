@@ -1,0 +1,1 @@
+Executed TCP loopback validation: sender transmitted five newline-delimited telemetry records; Dashboard ECU received and displayed five records. TCP peer closed cleanly and sender exited with code 0. See results/validation_summary.txt for the full test matrix.
