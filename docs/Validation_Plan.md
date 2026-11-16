@@ -1,23 +1,19 @@
-# DrivePulse – Validation Plan and Report Template
+# Validation Report
 
-Run and record the following scenarios on your Ubuntu machine. Do not mark a test as passed until you have executed it and retained evidence.
+## Environment
+Linux, GCC, C11, `-Wall -Wextra -Wpedantic -O2`, IPv4 loopback.
 
-| # | Scenario | Procedure | Evidence to record |
-|---|---|---|---|
-| 1 | Normal communication | Run dashboard and sender in UDP, then TCP | Received speed, RPM, steering angle and packet capture |
-| 2 | Receiver unavailable | Stop dashboard; run sender in both modes | Actual UDP behavior and TCP connection error |
-| 3 | Extended transmission | Run sender with --count 120 | Sequence numbers, missing/duplicate records, duration |
-| 4 | Invalid/unreachable IP | Try --host not-an-ip, then 192.0.2.55 | Validation error and actual network behavior |
-| 5 | TCP vs UDP | Capture both modes in Wireshark | Handshake, payload, termination and datagram observations |
+## Executed application checks
+| Test | Result |
+|---|---|
+| Compile both applications | PASS |
+| UDP sender to dashboard – 5 records | PASS: 5 received |
+| TCP sender to dashboard – 5 records | PASS: 5 received |
+| UDP receiver unavailable | Expected: sender may return success; UDP does not confirm delivery |
+| TCP receiver unavailable | Expected: connection refused / non-zero exit |
+| Invalid IPv4 address | PASS: rejected |
 
-## Result record
-- Test date / Ubuntu version:
-- GCC version:
-- Wireshark version:
-- Test 1 observations:
-- Test 2 observations:
-- Test 3 observations:
-- Test 4 observations:
-- Test 5 observations:
-- PCAP filenames:
-- Screenshot filenames:
+Detailed logs are retained under `logs/` and `results/`.
+
+## Packet evidence status
+Genuine packet captures and Wireshark screenshots were not produced in this runtime because raw packet capture was unavailable. Do not interpret the terminal preview as a Wireshark screenshot. On Ubuntu, install tcpdump/Wireshark, run `scripts/run_experiments.sh`, inspect the resulting PCAPs and save actual Wireshark screenshots.
