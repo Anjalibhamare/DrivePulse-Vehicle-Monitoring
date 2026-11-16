@@ -1,0 +1,7 @@
+Scenario 03 – Extended telemetry session
+
+The sender and dashboard were run in both transport modes for five consecutive telemetry updates during the recorded smoke test. Each run completed successfully. The sender supports longer runs with --count N or --count 0 for continuous transmission.
+
+UDP dashboard records: 5
+TCP dashboard records: 5
+Result: PASS for both local application-level runs.
